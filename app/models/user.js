@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       lastName: {
         type: DataTypes.STRING
       },
+      idCardNumber: {
+        type: DataTypes.STRING
+      },
       username: {
         type: DataTypes.STRING,
         unique: true

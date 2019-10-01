@@ -13,6 +13,9 @@ module.exports = {
       last_name: {
         type: Sequelize.STRING
       },
+      id_card_number: {
+        type: Sequelize.STRING
+      },
       username: {
         type: Sequelize.STRING,
         unique: true
