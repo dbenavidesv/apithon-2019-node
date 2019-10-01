@@ -1,11 +1,12 @@
-const errors = require('../errors');
+const { errors } = require('../constants');
 const logger = require('../logger');
 
 const DEFAULT_STATUS_CODE = 500;
 
 const statusCodes = {
+  [errors.DEFAULT_ERROR]: 500,
   [errors.DATABASE_ERROR]: 503,
-  [errors.DEFAULT_ERROR]: 500
+  [errors.INVALID_CREDENTIALS_ERROR]: 401
 };
 
 exports.handle = (error, req, res, next) => {

@@ -1,10 +1,16 @@
-const internalError = (message, internalCode) => ({
+const { errors } = require('./constants');
+
+const { DEFAULT_ERROR, DATABASE_ERROR } = errors;
+
+const errorObjectCreation = (message, internalCode) => ({
   message,
   internalCode
 });
 
-exports.DATABASE_ERROR = 'database_error';
-exports.databaseError = message => internalError(message, exports.DATABASE_ERROR);
+const internalError = (message, internalCode) => Promise.reject(errorObjectCreation(message, internalCode));
 
-exports.DEFAULT_ERROR = 'default_error';
-exports.defaultError = message => internalError(message, exports.DEFAULT_ERROR);
+exports.defaultError = message => internalError(message, DEFAULT_ERROR);
+
+exports.databaseError = error => internalError(`${error.name}: ${error.message}`, DATABASE_ERROR);
+
+exports.badLogInError = (message, code) => internalError(message, code);
