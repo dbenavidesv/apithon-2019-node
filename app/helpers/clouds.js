@@ -4,7 +4,7 @@ const constants = require('../constants');
 const { POLUTION_LEVELS_PM_25 } = constants;
 
 const getPolutionLevel = value => {
-  const level = POLUTION_LEVELS_PM_25.find(polutionLevel => value < polutionLevel.value).id;
+  const level = POLUTION_LEVELS_PM_25.find(polutionLevel => value < polutionLevel.value);
   return { id: level.id, label: level.label };
 };
 
