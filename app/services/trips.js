@@ -9,3 +9,5 @@ exports.createTrip = trip =>
       )
     )
     .catch(error => databaseError(error));
+
+exports.getTrips = params => Trip.findAll({ where: params, include: [{ model: Track }] });
