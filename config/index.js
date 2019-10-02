@@ -47,6 +47,10 @@ const config = {
       apiDate: process.env.API_DATE || 'X-API-Date',
       packageVersion: process.env.PACKAGE_VERSION || 'X-Package-Version',
       nodeVersion: process.env.NODE_VERSION || 'X-Node-Version'
+    },
+    cloudsApi: {
+      endpoint: process.env.CLOUDS_API_URL,
+      minutesForAvg: process.env.MINUTES_FOR_AVG || 5
     }
   }
 };
