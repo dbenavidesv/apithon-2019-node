@@ -8,6 +8,6 @@ exports.init = app => {
   app.post('/users', signUpUser);
   app.post('/users/sessions', logInUser);
 
-  app.get('/clouds', getCloudsMeasurements);
+  app.get('/clouds/measurements', getCloudsMeasurements);
   app.get('/clouds/nearest', getNearestCloud);
 };
