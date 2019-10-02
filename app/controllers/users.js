@@ -26,7 +26,10 @@ exports.logInUser = (req, res, next) => {
   logger.info('Loging in...');
   const credentials = req.body;
   return validateCredentials(credentials)
-    .then(generateToken)
-    .then(token => res.status(200).send(serializeResponse(USER_LOGGED_IN, { token })))
+    .then(user =>
+      generateToken(user).then(token =>
+        res.status(200).send(serializeResponse(USER_LOGGED_IN, { token, userId: user.id }))
+      )
+    )
     .catch(next);
 };

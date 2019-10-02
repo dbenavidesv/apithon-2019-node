@@ -1,4 +1,12 @@
 const { findNearest } = require('geolib');
+const constants = require('../constants');
+
+const { POLUTION_LEVELS_PM_25 } = constants;
+
+const getPolutionLevel = value => {
+  const level = POLUTION_LEVELS_PM_25.find(polutionLevel => value < polutionLevel.value).id;
+  return { id: level.id, label: level.label };
+};
 
 exports.getLastestAverageMeasurements = (measurements, minutes) =>
   measurements.map(measurement => ({
@@ -7,7 +15,8 @@ exports.getLastestAverageMeasurements = (measurements, minutes) =>
     longitude: measurement.longitud,
     latitude: measurement.latitud,
     town: measurement.municipio,
-    value: measurement.datos.slice(0, minutes).reduce((sum, current) => sum + current.valor, 0) / minutes
+    value: measurement.datos.slice(0, minutes).reduce((sum, current) => sum + current.valor, 0) / minutes,
+    polutionLevel: getPolutionLevel(this.value)
   }));
 
 exports.clasifyByActive = measurements =>
