@@ -9,15 +9,20 @@ const getPolutionLevel = value => {
 };
 
 exports.getLastestAverageMeasurements = (measurements, minutes) =>
-  measurements.map(measurement => ({
-    id: measurement.codigoSerial,
-    name: measurement.nombre,
-    longitude: measurement.longitud,
-    latitude: measurement.latitud,
-    town: measurement.municipio,
-    value: measurement.datos.slice(0, minutes).reduce((sum, current) => sum + current.valor, 0) / minutes,
-    polutionLevel: getPolutionLevel(this.value)
-  }));
+  measurements.map(measurement => {
+    const value =
+      measurement.datos.slice(0, minutes).reduce((sum, current) => sum + current.valor, 0) / minutes;
+    const polutionLevel = getPolutionLevel(value);
+    return {
+      id: measurement.codigoSerial,
+      name: measurement.nombre,
+      longitude: measurement.longitud,
+      latitude: measurement.latitud,
+      town: measurement.municipio,
+      value,
+      polutionLevel
+    };
+  });
 
 exports.clasifyByActive = measurements =>
   measurements.map(measurement =>
